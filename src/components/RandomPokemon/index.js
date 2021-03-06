@@ -1,6 +1,7 @@
 // Random Pokemon Generator
 import React from 'react';
 import Axios from 'axios';
+import Guess from '../Guess'
 
 class RandomPokemon extends React.Component {
     constructor(props) {
@@ -9,7 +10,6 @@ class RandomPokemon extends React.Component {
         this.state = {
             loading: true,
             error: false,
-            guess: "",
             pokemon: "",
             caught: []
         };
@@ -48,6 +48,7 @@ class RandomPokemon extends React.Component {
                             <div>
                             <p>Found!</p>
                             <img alt="pokemon" src={this.state.pokemon.sprites.front_default} />
+                            <Guess {...this.state.pokemon} />
                             </div>
                         )
 

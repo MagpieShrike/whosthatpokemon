@@ -1,7 +1,8 @@
 // Random Pokemon Generator
 import React from 'react';
 import Axios from 'axios';
-import Guess from '../Guess'
+import Identify from '../Identify'
+import rpCSS from './randomPokemon.module.css'
 
 class RandomPokemon extends React.Component {
     constructor(props) {
@@ -38,17 +39,18 @@ class RandomPokemon extends React.Component {
 
     render() {
         return(
-            <div>
-                <h1>Search for Pokemon</h1>
-                <br />
-                <button onClick={() => this.generatePokemon()}>Search</button>
+            <div className={rpCSS.box}>
+                <h1 className={rpCSS.h1}>Search for Pokemon</h1>
+
+                <button className={rpCSS.button} onClick={() => this.generatePokemon()}>Search</button>
                 {
-                    (this.state.loading === true) ? (<p>Searching...</p>) : (
-                        (this.state.error === true) ? (<p>Nothing found!</p>) : (
+                    (this.state.loading === true) ? (<><br /><br /></>) : (
+                        (this.state.error === true) ? (<p className={rpCSS.p}>Nothing found!</p>) : (
                             <div>
-                            <p>Found!</p>
+                            <br /><br />
                             <img alt="pokemon" src={this.state.pokemon.sprites.front_default} />
-                            <Guess {...this.state.pokemon} />
+                            <p className={rpCSS.p}>Found a Pokemon!</p>
+                            <Identify {...this.state.pokemon} />
                             </div>
                         )
 

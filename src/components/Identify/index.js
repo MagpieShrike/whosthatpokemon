@@ -1,6 +1,7 @@
 import React from 'react';
+import iCSS from './identify.module.css'
 
-class Guess extends React.Component {
+class Identify extends React.Component {
     constructor(props){
         super(props);
 
@@ -19,20 +20,20 @@ class Guess extends React.Component {
 
     render() {
         return(
-            <div>
+            <div className={iCSS.box}>
                 {console.log(this.props.name)}
-                <h1>Who's that Pokemon?</h1>
-                <input type="text" onChange={(event) => {
+                <h1 className={iCSS.h1}>Who's that Pokemon?</h1>
+                <input className={iCSS.input} type="text" onChange={(event) => {
                     this.setState({ guess: event.target.value})
                 }} />
-                <button onClick={() => this.check(this.props.name)}>Identify</button>
+                <button className={iCSS.button} onClick={() => this.check(this.props.name)}>Identify</button>
             
                 {
                     (this.state.correct === null) ? ( <></>)
                     : (
                         (this.state.correct == true) 
-                        ? ( <p>Correct!</p> )
-                        : ( <p>Try again.</p> )
+                        ? ( <p className={iCSS.p}>Correct!</p> )
+                        : ( <p className={iCSS.p}>Try again.</p> )
                     )
                     
                 }
@@ -41,4 +42,4 @@ class Guess extends React.Component {
     }
 }
 
-export default Guess;
+export default Identify;

@@ -1,8 +1,9 @@
 // Random Pokemon Generator
 import React from 'react';
 import Axios from 'axios';
-import Identify from '../Identify'
-import rpCSS from './randomPokemon.module.css'
+import Identify from '../Identify';
+import Collection from '../Collection';
+import rpCSS from './randomPokemon.module.css';
 
 class RandomPokemon extends React.Component {
     constructor(props) {
@@ -12,8 +13,16 @@ class RandomPokemon extends React.Component {
             loading: true,
             error: false,
             pokemon: "",
-            caught: []
+            collection: []
         };
+    }
+
+    updateCollection(newItem) {
+        this.setState(() => {
+            const collection = this.state.collection;
+            collection.push( newItem );
+            return { collection: this.state.collection }
+        })
     }
 
     generatePokemon() {
@@ -50,7 +59,8 @@ class RandomPokemon extends React.Component {
                             <br /><br />
                             <img alt="pokemon" src={this.state.pokemon.sprites.front_default} />
                             <p className={rpCSS.p}>Found a Pokemon!</p>
-                            <Identify {...this.state.pokemon} />
+                            <Identify {...this.state.pokemon} {...this.state} updateCollection={(item) => this.updateCollection(item)} />
+                            <Collection {...this.state} />
                             </div>
                         )
 

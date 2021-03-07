@@ -6,9 +6,10 @@ class Identify extends React.Component {
         super(props);
 
         this.state = {
-            //pokemon: this.props.pokemon.name,
+
             guess: "",
-            correct: null
+            correct: null,
+            newItem: ""
         }
     }
 
@@ -16,6 +17,16 @@ class Identify extends React.Component {
         (this.state.guess == pokemon) 
         ? ( this.setState({ correct: true }) )
         : ( this.setState({ correct: false }) )
+    }
+
+    updateCollection() {
+        this.setState(() => {
+            let newItem = this.props.name;
+            this.props.updateCollection(newItem)
+            return {
+                collection: newItem,
+            };
+        })
     }
 
     render() {
@@ -32,7 +43,13 @@ class Identify extends React.Component {
                     (this.state.correct === null) ? ( <></>)
                     : (
                         (this.state.correct == true) 
-                        ? ( <p className={iCSS.p}>Correct!</p> )
+                        ? ( <>
+                                <p className={iCSS.p}>Correct!</p>
+                                {
+                                    this.updateCollection
+                                    // Error: maximum update depth exceeded
+                                }
+                            </> )
                         : ( <p className={iCSS.p}>Try again.</p> )
                     )
                     
